@@ -49,15 +49,3 @@ xcrun swiftc -module-cache-path .build/module-cache src/Accounts.swift tests/Acc
 ```
 
 The build creates a universal app and an Installer package in `dist/`. The package installs only the app in `/Applications`. The default local build uses an ad hoc app signature and an unsigned installer.
-
-## Public release
-
-Use Developer ID Application and Developer ID Installer certificates and a saved notarytool keychain profile:
-
-```sh
-APP_SIGN_IDENTITY='Developer ID Application: YOUR NAME (TEAMID)' \
-INSTALLER_SIGN_IDENTITY='Developer ID Installer: YOUR NAME (TEAMID)' \
-NOTARY_PROFILE='your-notary-profile' ./build.sh
-```
-
-The release build signs the app and package, submits the package to Apple, staples the notarization ticket and checks Gatekeeper acceptance. Distribute the resulting `.pkg`. Before publishing a new version, update the version and build number in `build.sh` and test installing, creating a profile and reopening it on a clean Mac with a supported desktop app.
